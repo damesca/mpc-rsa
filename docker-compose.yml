@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+    node:
+        build:
+            context: ./node
+        image: node
+        tty: true
+        networks:
+            rsa-net:
+    ca:
+        build:
+            context: ./ca
+        image: ca
+        tty: true
+        networks:
+            rsa-net:
+    orchestrator:
+        build:
+            context: ./orchestrator
+        image: orchestrator
+        tty: true
+        networks:
+            rsa-net:
+networks:
+    rsa-net:
+        external: true
+        name: rsa-net
+        ipam:
+            driver: default
+            config:
+                - subnet: "10.10.10.0/24"
